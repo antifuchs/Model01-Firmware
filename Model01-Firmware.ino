@@ -36,7 +36,7 @@
     Consumer_ScanPreviousTrack, Key_F6,                 Key_F7,                   Key_F8,                  Key_F9,          Key_F10,          Key_Pipe, \
     Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_LeftCurlyBracket,     Key_RightCurlyBracket,   Key_LeftBracket, Key_RightBracket, Key_F12, \
     Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,             Key_RightArrow,  ___,              Key_ToggleNumlock, \
-    Key_Menu,                   Consumer_Mute,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, ___,            Key_Backslash,    XXX, \
+    Key_RightAlt,                   Consumer_Mute,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, ___,            Key_Backslash,    XXX, \
     Key_RightControl, Key_RightGui, Key_Spacebar, Key_RightShift,       \
     ___                                                                 \
 )
@@ -61,7 +61,7 @@
 )
 
 #define QWERTY KEYMAP_STACKED (                                         \
-                               ___,           Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext, \
+                               ___,           Key_1, Key_2, Key_3, Key_4, Key_5, Key_Menu, \
                                Key_Backtick,  Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab, \
                                Key_Escape,    Key_A, Key_S, Key_D, Key_F, Key_G, \
                                Key_LeftShift,    Key_Z, Key_X, Key_C, Key_V, Key_B, Key_LeftAlt, \
