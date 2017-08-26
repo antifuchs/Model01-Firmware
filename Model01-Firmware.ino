@@ -30,14 +30,14 @@
   ___,      Key_F1,           Key_F2,      Key_F3,     Key_F4,        Key_F5,           XXX, \
   Key_Tab,  ___,              Key_mouseUp, ___,        Key_mouseBtnR, Key_mouseWarpEnd, Key_mouseWarpNE, \
   Key_Home, Key_mouseL,       Key_mouseDn, Key_mouseR, Key_mouseBtnL, Key_mouseWarpNW, \
-  Key_End,  Key_PrintScreen,  Key_Insert,  ___,        Key_mouseBtnM, Key_mouseWarpSW,  Key_mouseWarpSE, \
+  Key_LeftShift,  Key_Home,  Key_End,  XXX,        XXX, XXX,  Key_LeftAlt, \
   Key_LeftShift, Key_Backspace, Key_LeftGui, Key_LeftControl,           \
   ___,                                                                  \
                                                                         \
     Consumer_ScanPreviousTrack, Key_F6,                 Key_F7,                   Key_F8,                  Key_F9,          Key_F10,          Key_Pipe, \
     Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_LeftCurlyBracket,     Key_RightCurlyBracket,   Key_LeftBracket, Key_RightBracket, Key_F12, \
     Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,             Key_RightArrow,  ___,              Key_ToggleNumlock, \
-    Key_RightAlt,                   Consumer_Mute,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, ___,            Key_Backslash,    XXX, \
+    Key_RightAlt,                   Consumer_Mute,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, ___,            Key_Backslash,    Key_RightShift, \
     Key_RightControl, Key_RightGui, Key_Spacebar, Key_RightShift,       \
     ___                                                                 \
 )
