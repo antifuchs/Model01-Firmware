@@ -40,7 +40,7 @@
                                                                         \
     Key_LeftCurlyBracket, Key_F6,                 Key_F7,                   Key_F8,                  Key_F9,          Key_F10,          Key_Pipe, \
   Consumer_PlaySlashPause,    Key_RightCurlyBracket, Macro_LeftParen,     Macro_RightParen,   Key_LeftBracket, Key_RightBracket, Key_F12, \
-    Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,             Key_RightArrow,  ___,              Key_ToggleNumlock, \
+  Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,             Key_RightArrow,  Consumer_ScanPreviousTrack,              Consumer_ScanNextTrack, \
     Key_RightAlt,                   Consumer_Mute,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, ___,            Key_Backslash,    Key_RightShift, \
     Key_RightControl, Key_RightGui, Key_Spacebar, Key_RightShift,       \
     ___                                                                  \
