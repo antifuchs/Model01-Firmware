@@ -27,9 +27,9 @@
 #define NUMPAD_KEYMAP 2
 
 #define GENERIC_FN2  KEYMAP_STACKED ( \
-  ___,      Key_F1,           Key_F2,      Key_F3,     Key_F4,        Key_F5,           XXX, \
-  Key_Tab,  ___,              Key_mouseUp, ___,        Key_mouseBtnR, Key_mouseWarpEnd, Key_mouseWarpNE, \
-  Key_Home, Key_mouseL,       Key_mouseDn, Key_mouseR, Key_mouseBtnL, Key_mouseWarpNW, \
+  ___,      Key_F1,           Key_F2,      Key_F3,     Key_F4,        Key_F5,           Key_Menu, \
+  Key_Tab,  ___,              Key_mouseScrollUp, ___,        Key_mouseBtnR, XXX, XXX, \
+  Key_Home, XXX, Key_mouseScrollDn, XXX, Key_mouseBtnL, XXX, \
   Key_LeftShift,  Key_Home,  Key_End,  XXX,        XXX, XXX,  Key_LeftAlt, \
   Key_LeftShift, Key_Backspace, Key_LeftGui, Key_LeftControl,           \
   ___,                                                                  \
@@ -39,7 +39,7 @@
     Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,             Key_RightArrow,  ___,              Key_ToggleNumlock, \
     Key_RightAlt,                   Consumer_Mute,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, ___,            Key_Backslash,    Key_RightShift, \
     Key_RightControl, Key_RightGui, Key_Spacebar, Key_RightShift,       \
-    ___                                                                 \
+    ___                                                                  \
 )
 
 
@@ -58,7 +58,7 @@
     ___, Key_Keypad1, Key_Keypad2,   Key_Keypad3,        Key_Equals,         Key_ToggleNumlock, \
     ___, ___, Key_Keypad0, Key_KeypadDot, Key_KeypadMultiply, Key_KeypadDivide,   Key_Enter, \
     ___, ___, ___, ___, \
-    Key_Keymap1_Momentary \
+    Key_Keymap1_Momentary                      \
 )
 
 #define QWERTY KEYMAP_STACKED (                                         \
