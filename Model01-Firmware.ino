@@ -121,6 +121,7 @@ void setup() {
 
   NumLock.numPadLayer = NUMPAD_KEYMAP;
   AlphaSquare.color = { 255, 0, 0 };
+  solidOrange.activate();
 }
 
 
