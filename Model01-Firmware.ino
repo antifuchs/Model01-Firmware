@@ -16,6 +16,7 @@
 #include "Kaleidoscope.h"
 
 #include "LED-Off.h"
+#include "Kaleidoscope-LEDEffect-BootGreeting.h"
 #include "Kaleidoscope-LEDEffect-SolidColor.h"
 #include "Kaleidoscope-LED-AlphaSquare.h"
 
@@ -82,13 +83,13 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
   NUMPAD
 };
 
-static LEDSolidColor solidRed(160, 0, 0);
-static LEDSolidColor solidOrange(140, 70, 0);
-static LEDSolidColor solidYellow(130, 100, 0);
-static LEDSolidColor solidGreen(0, 160, 0);
-static LEDSolidColor solidBlue(0, 70, 130);
-static LEDSolidColor solidIndigo(0, 0, 170);
-static LEDSolidColor solidViolet(130, 0, 120);
+static kaleidoscope::LEDSolidColor solidRed(160, 0, 0);
+static kaleidoscope::LEDSolidColor solidOrange(140, 70, 0);
+static kaleidoscope::LEDSolidColor solidYellow(130, 100, 0);
+static kaleidoscope::LEDSolidColor solidGreen(0, 160, 0);
+static kaleidoscope::LEDSolidColor solidBlue(0, 70, 130);
+static kaleidoscope::LEDSolidColor solidIndigo(0, 0, 170);
+static kaleidoscope::LEDSolidColor solidViolet(130, 0, 120);
 
 const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
   if (macroIndex == TOGGLENUMLOCK && keyToggledOn(keyState)) {
@@ -111,8 +112,7 @@ void setup() {
   Kaleidoscope.setup(KEYMAP_SIZE);
   BootKeyboard.begin();
   Kaleidoscope.use(&LEDControl,
-                   &solidOrange,
-                   &AlphaSquareEffect,
+                   &LEDOff,
                    &NumLock,
 
                    &Macros,
@@ -121,7 +121,6 @@ void setup() {
 
   NumLock.numPadLayer = NUMPAD_KEYMAP;
   AlphaSquare.color = { 255, 0, 0 };
-  solidOrange.activate();
 }
 
 
