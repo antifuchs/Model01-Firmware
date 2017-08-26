@@ -24,6 +24,10 @@
 #define Macro_VersionInfo M(MACRO_VERSION_INFO)
 #define MACRO_ANY 2
 #define Macro_Any M(MACRO_ANY)
+#define MACRO_LEFTPAREN 3
+#define MACRO_RIGHTPAREN 4
+#define Macro_RightParen M(MACRO_RIGHTPAREN)
+#define Macro_LeftParen M(MACRO_LEFTPAREN)
 #define NUMPAD_KEYMAP 2
 
 #define GENERIC_FN2  KEYMAP_STACKED ( \
@@ -34,8 +38,8 @@
   Key_LeftShift, Key_Backspace, Key_LeftGui, Key_LeftControl,           \
   ___,                                                                  \
                                                                         \
-    Consumer_ScanPreviousTrack, Key_F6,                 Key_F7,                   Key_F8,                  Key_F9,          Key_F10,          Key_Pipe, \
-    Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_LeftCurlyBracket,     Key_RightCurlyBracket,   Key_LeftBracket, Key_RightBracket, Key_F12, \
+    Key_LeftCurlyBracket, Key_F6,                 Key_F7,                   Key_F8,                  Key_F9,          Key_F10,          Key_Pipe, \
+  Consumer_PlaySlashPause,    Key_RightCurlyBracket, Macro_LeftParen,     Macro_RightParen,   Key_LeftBracket, Key_RightBracket, Key_F12, \
     Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,             Key_RightArrow,  ___,              Key_ToggleNumlock, \
     Key_RightAlt,                   Consumer_Mute,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, ___,            Key_Backslash,    Key_RightShift, \
     Key_RightControl, Key_RightGui, Key_Spacebar, Key_RightShift,       \
@@ -97,6 +101,10 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
   } else if (macroIndex == 1 && keyToggledOn(keyState)) {
     Macros.type(PSTR("Keyboardio Model 01 - Kaleidoscope "));
     Macros.type(PSTR(BUILD_INFORMATION));
+  } else if (macroIndex == MACRO_LEFTPAREN) {
+    return MACRODOWN(I(10), D(LeftShift), T(9), U(LeftShift));
+  } else if (macroIndex == MACRO_RIGHTPAREN) {
+    return MACRODOWN(I(10), D(LeftShift), T(0), U(LeftShift));
   } else if (macroIndex == MACRO_ANY) {
     static Key lastKey;
     if (keyToggledOn(keyState))
