@@ -23,17 +23,13 @@
 
 // Support for host power management (suspend & wakeup)
 #include "Kaleidoscope-HostPowerManagement.h"
-#define MACRO_VERSION_INFO 1
-#define Macro_VersionInfo M(MACRO_VERSION_INFO)
-#define MACRO_ANY 2
-#define Macro_Any M(MACRO_ANY)
+
 #define MACRO_LEFTPAREN 3
 #define MACRO_RIGHTPAREN 4
 #define MACRO_ALLMODS 5
 #define Macro_RightParen M(MACRO_RIGHTPAREN)
 #define Macro_LeftParen M(MACRO_LEFTPAREN)
 #define Macro_AllMods M(MACRO_ALLMODS)
-#define NUMPAD_KEYMAP 2
 
 #define GENERIC_FN2  KEYMAP_STACKED ( \
     ___,                  Key_F1,                  Key_F2,                   Key_F3,                   Key_F4,                     Key_F5,                 Macro_AllMods, \
@@ -51,24 +47,6 @@
     ___                                         \
 )
 
-
-
-#define NUMPAD KEYMAP_STACKED  (\
-    ___,                   ___,         ___,         ___,           ___,                ___,                ___, \
-    ___,                   ___,         ___,         ___,           ___,                ___,                ___, \
-    ___,                   ___,         ___,         ___,           ___,                ___, \
-    ___,                   ___,         ___,         ___,           ___,                ___,                ___, \
-    ___,                   ___,         ___,         ___, \
-    Key_Keymap1_Momentary,                      \
-                                                \
-                                                \
-    Key_ToggleNumlock,     ___,         Key_Keypad7, Key_Keypad8,   Key_Keypad9,        Key_KeypadSubtract, ___, \
-    ___,                   ___,         Key_Keypad4, Key_Keypad5,   Key_Keypad6,        Key_KeypadAdd,      ___, \
-    ___,                   Key_Keypad1, Key_Keypad2, Key_Keypad3,   Key_Equals,         Key_ToggleNumlock, \
-    ___,                   ___,         Key_Keypad0, Key_KeypadDot, Key_KeypadMultiply, Key_KeypadDivide,   Key_Enter, \
-    ___,                   ___,         ___,         ___, \
-    Key_Keymap1_Momentary                       \
-)
 
 #define QWERTY KEYMAP_STACKED (                 \
      ___,                      Key_1,         Key_2,        Key_3,           Key_4,         Key_5,     Macro_AllMods, \
@@ -89,7 +67,6 @@
 const Key keymaps[][ROWS][COLS] PROGMEM = {
   QWERTY,
   GENERIC_FN2,
-  NUMPAD
 };
 
 static kaleidoscope::LEDSolidColor solidRed(160, 0, 0);
@@ -127,9 +104,7 @@ static void OneShotHyper(uint8_t keyState) {
 }
 
 const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
-  if (macroIndex == TOGGLENUMLOCK && keyToggledOn(keyState)) {
-    return NumLock.toggle();
-  } else if (macroIndex == MACRO_LEFTPAREN) {
+  if (macroIndex == MACRO_LEFTPAREN) {
     return MACRODOWN(I(10), D(LeftShift), T(9), U(LeftShift));
   } else if (macroIndex == MACRO_RIGHTPAREN) {
     return MACRODOWN(I(10), D(LeftShift), T(0), U(LeftShift));
@@ -140,11 +115,9 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 }
 
 void setup() {
-  Kaleidoscope.setup(KEYMAP_SIZE);
   BootKeyboard.begin();
   Kaleidoscope.use(&LEDControl,
                    &LEDOff,
-                   &NumLock,
                    &OneShot,
 
                    &Macros,
@@ -152,10 +125,10 @@ void setup() {
                    &HostPowerManagement,
                    NULL);
 
-  NumLock.numPadLayer = NUMPAD_KEYMAP;
   AlphaSquare.color = { 255, 0, 0 };
   HostPowerManagement.enableWakeup();
   LEDOff.activate();
+  Kaleidoscope.setup();
 }
 
 
