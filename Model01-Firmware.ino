@@ -28,12 +28,12 @@
 enum {QWERTY, FUNCTION};
 
 // Macros:
-enum { MACRO_LEFTPAREN, MACRO_RIGHTPAREN, MACRO_ALLMODS };
+enum { MACRO_LEFTPAREN, MACRO_RIGHTPAREN, MACRO_ALLMODS, MACRO_SEXP };
 
 // *INDENT-OFF*
 KEYMAPS(
   [QWERTY] = KEYMAP_STACKED
-    (___,                      Key_1,         Key_2,        Key_3,           Key_4,         Key_5,     M(MACRO_ALLMODS),
+    (M(MACRO_SEXP),            Key_1,         Key_2,        Key_3,           Key_4,         Key_5,     M(MACRO_ALLMODS),
      Key_Backtick,             Key_Q,         Key_W,        Key_E,           Key_R,         Key_T,     Key_Tab,
      Key_Escape,               Key_A,         Key_S,        Key_D,           Key_F,         Key_G,
      Key_LeftShift,            Key_Z,         Key_X,        Key_C,           Key_V,         Key_B,     Key_LeftAlt,
@@ -96,6 +96,11 @@ void hostPowerManagementEventHandler(kaleidoscope::HostPowerManagement::Event ev
   toggleLedsOnSuspendResume(event);
 }
 
+static void OneShotSexp(uint8_t keyState) {
+  handleKeyswitchEvent(OSM(LeftControl), UNKNOWN_KEYSWITCH_LOCATION, keyState);
+  handleKeyswitchEvent(OSM(LeftAlt), UNKNOWN_KEYSWITCH_LOCATION, keyState);
+}
+
 static void OneShotHyper(uint8_t keyState) {
   handleKeyswitchEvent(OSM(LeftControl), UNKNOWN_KEYSWITCH_LOCATION, keyState);
   handleKeyswitchEvent(OSM(LeftAlt), UNKNOWN_KEYSWITCH_LOCATION, keyState);
@@ -109,6 +114,8 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
     return MACRODOWN(I(10), D(LeftShift), T(0), U(LeftShift));
   } else if (macroIndex == MACRO_ALLMODS) {
     OneShotHyper(keyState);
+  } else if (macroIndex == MACRO_SEXP) {
+    OneShotSexp(keyState);
   }
   return MACRO_NONE;
 }
