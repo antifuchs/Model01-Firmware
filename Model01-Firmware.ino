@@ -49,11 +49,11 @@ KEYMAPS(
      ShiftToLayer(FUNCTION)),
 
   [FUNCTION] = KEYMAP_STACKED
-    (___,                  Key_F1,                  Key_F2,                   Key_F3,                   Key_F4,                     Key_F5,                 ___,
-     Key_Tab,              XXX,                     Key_mouseScrollUp,        XXX,                      Key_mouseBtnR,              XXX,                    XXX,
-     Key_Home,             XXX,                     Key_mouseScrollDn,        XXX,                      Key_mouseBtnL,              XXX,
-     Key_LeftShift,        Key_Home,                Key_End,                  XXX,                      XXX,                        XXX,                    Key_LeftAlt,
-     Key_LeftShift,        Key_Backspace,           Key_LeftGui,              Key_LeftControl,
+    (___,           Key_F1,        Key_F2,            Key_F3, Key_F4, Key_F5, ___,
+     Key_Tab,       XXX,           Key_mouseScrollUp, XXX,    XXX,    XXX,    XXX,
+     Key_mouseBtnR, Key_mouseBtnL, Key_mouseScrollDn, XXX,    XXX,    XXX,
+     Key_LeftShift, Key_Home,      Key_End,           XXX,    XXX,    XXX,    Key_LeftAlt,
+     Key_LeftShift, Key_Backspace, Key_LeftGui,       Key_LeftControl,
      ___,
 
      ___,              Key_F6,                  Key_F7,                   Key_F8,                   Key_F9,          Key_F10,                    Key_F11,
