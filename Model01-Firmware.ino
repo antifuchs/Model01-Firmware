@@ -28,17 +28,17 @@
 enum {QWERTY, FUNCTION};
 
 // Macros:
-enum { MACRO_ALLMODS, MACRO_SEXP };
+enum { MACRO_ALLMODS, MACRO_SEXP, MACRO_HS};
 
 // *INDENT-OFF*
 // To align these blocks, mark each one (one side at a time) and use C-u M-x align RET.
 KEYMAPS(
   [QWERTY] = KEYMAP_STACKED
-    (M(MACRO_ALLMODS),                      Key_1,         Key_2,        Key_3,           Key_4,         Key_5,     M(MACRO_SEXP),
-     Key_Backtick,             Key_Q,         Key_W,        Key_E,           Key_R,         Key_T,     Key_Tab,
-     Key_Escape,               Key_A,         Key_S,        Key_D,           Key_F,         Key_G,
-     Key_LeftShift,            Key_Z,         Key_X,        Key_C,           Key_V,         Key_B,     Key_LeftAlt,
-     Key_LeftShift,            Key_Backspace, Key_LeftGui,  Key_LeftControl,
+    (M(MACRO_ALLMODS), Key_1,         Key_2,       Key_3, Key_4, Key_5, M(MACRO_SEXP),
+     Key_Backtick,     Key_Q,         Key_W,       Key_E, Key_R, Key_T, Key_Tab,
+     Key_Escape,       Key_A,         Key_S,       Key_D, Key_F, Key_G,
+     Key_LeftShift,    Key_Z,         Key_X,       Key_C, Key_V, Key_B, Key_LeftAlt,
+     Key_LeftShift,    Key_Backspace, Key_LeftGui, Key_LeftControl,
      ShiftToLayer(FUNCTION),
 
      M(MACRO_ALLMODS), Key_6,        Key_7,        Key_8,     Key_9,      Key_0,         Key_Minus,
@@ -49,10 +49,10 @@ KEYMAPS(
      ShiftToLayer(FUNCTION)),
 
   [FUNCTION] = KEYMAP_STACKED
-    (___,           Key_F1,        Key_F2,            Key_F3, Key_F4, Key_F5, ___,
-     Key_Tab,       XXX,           Key_mouseScrollUp, XXX,    XXX,    XXX,    XXX,
-     Key_mouseBtnR, Key_mouseBtnL, Key_mouseScrollDn, XXX,    XXX,    XXX,
-     Key_LeftShift, Key_Home,      Key_End,           XXX,    XXX,    XXX,    Key_LeftAlt,
+    (___,           Key_F1,        Key_F2,            Key_F3,      Key_F4,      Key_F5,      ___,
+     Key_Tab,       XXX,           Key_mouseScrollUp, M(MACRO_HS), M(MACRO_HS), M(MACRO_HS), XXX,
+     Key_mouseBtnR, Key_mouseBtnL, Key_mouseScrollDn, M(MACRO_HS), M(MACRO_HS), M(MACRO_HS),
+     Key_LeftShift, Key_Home,      Key_End,           M(MACRO_HS), M(MACRO_HS), M(MACRO_HS), Key_LeftAlt,
      Key_LeftShift, Key_Backspace, Key_LeftGui,       Key_LeftControl,
      ___,
 
@@ -109,10 +109,19 @@ static void OneShotHyper(uint8_t keyState) {
 }
 
 const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
-  if (macroIndex == MACRO_ALLMODS) {
+  switch(macroIndex) {
+  case MACRO_ALLMODS:
     OneShotHyper(keyState);
-  } else if (macroIndex == MACRO_SEXP) {
+    return MACRO_NONE;
+  case MACRO_SEXP:
     OneShotSexp(keyState);
+    return MACRO_NONE;
+  case MACRO_HS:
+    return MACRODOWN(D(LeftControl), D(LeftGui), D(LeftAlt),
+                     W(10),
+                     Tr(keymaps[QWERTY][Macros.row][Macros.col]),
+                     W(10),
+                     U(LeftControl), U(LeftGui), U(LeftAlt));
   }
   return MACRO_NONE;
 }
