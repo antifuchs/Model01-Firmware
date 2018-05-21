@@ -28,9 +28,10 @@
 enum {QWERTY, FUNCTION};
 
 // Macros:
-enum { MACRO_LEFTPAREN, MACRO_RIGHTPAREN, MACRO_ALLMODS, MACRO_SEXP };
+enum { MACRO_ALLMODS, MACRO_SEXP };
 
 // *INDENT-OFF*
+// To align these blocks, mark each one (one side at a time) and use C-u M-x align RET.
 KEYMAPS(
   [QWERTY] = KEYMAP_STACKED
     (M(MACRO_ALLMODS),                      Key_1,         Key_2,        Key_3,           Key_4,         Key_5,     M(MACRO_SEXP),
@@ -40,26 +41,26 @@ KEYMAPS(
      Key_LeftShift,            Key_Backspace, Key_LeftGui,  Key_LeftControl,
      ShiftToLayer(FUNCTION),
 
-     M(MACRO_ALLMODS), Key_6,        Key_7,        Key_8,          Key_9,         Key_0,     Key_Minus,
-     Key_Enter,        Key_Y,        Key_U,        Key_I,          Key_O,         Key_P,     Key_Equals,
-     Key_H,            Key_J,        Key_K,        Key_L,          Key_Semicolon, Key_Quote,
-     Key_RightAlt,     Key_N,        Key_M,        Key_Comma,      Key_Period,    Key_Slash, Key_RightShift,
+     M(MACRO_ALLMODS), Key_6,        Key_7,        Key_8,     Key_9,      Key_0,         Key_Minus,
+     Key_Enter,        Key_Y,        Key_U,        Key_I,     Key_O,      Key_P,         Key_Equals
+     /* long key */,   Key_H,        Key_J,        Key_K,     Key_L,      Key_Semicolon, Key_Quote,
+     Key_RightAlt,     Key_N,        Key_M,        Key_Comma, Key_Period, Key_Slash,     Key_RightShift,
      Key_RightControl, Key_RightGui, Key_Spacebar, Key_RightShift,
      ShiftToLayer(FUNCTION)),
 
   [FUNCTION] = KEYMAP_STACKED
-    (___,                  Key_F1,                  Key_F2,                   Key_F3,                   Key_F4,                     Key_F5,                 M(MACRO_ALLMODS),
-     Key_Tab,              ___,                     Key_mouseScrollUp,        ___,                      Key_mouseBtnR,              XXX,                    XXX,
+    (___,                  Key_F1,                  Key_F2,                   Key_F3,                   Key_F4,                     Key_F5,                 ___,
+     Key_Tab,              XXX,                     Key_mouseScrollUp,        XXX,                      Key_mouseBtnR,              XXX,                    XXX,
      Key_Home,             XXX,                     Key_mouseScrollDn,        XXX,                      Key_mouseBtnL,              XXX,
      Key_LeftShift,        Key_Home,                Key_End,                  XXX,                      XXX,                        XXX,                    Key_LeftAlt,
      Key_LeftShift,        Key_Backspace,           Key_LeftGui,              Key_LeftControl,
      ___,
 
-     M(MACRO_ALLMODS),     Key_F6,                  Key_F7,                   Key_F8,                   Key_F9,                     Key_F10,                Key_F11,
-     Key_LeftCurlyBracket, Key_RightCurlyBracket,   M(MACRO_LEFTPAREN),       M(MACRO_RIGHTPAREN),      Key_LeftBracket,            Key_RightBracket,       Key_Pipe,
-     Key_LeftArrow,        Key_DownArrow,           Key_UpArrow,              Key_RightArrow,           Consumer_ScanPreviousTrack, Consumer_ScanNextTrack,
-     Key_RightAlt,         Consumer_PlaySlashPause, Consumer_VolumeDecrement, Consumer_VolumeIncrement, ___,                        Key_Backslash,          Key_RightShift,
-     Key_RightControl,     Key_RightGui,            Key_Spacebar,             Key_RightShift,
+     ___,              Key_F6,                  Key_F7,                   Key_F8,                   Key_F9,          Key_F10,                    Key_F11,
+     XXX,              XXX,                     Key_LeftCurlyBracket,     Key_RightCurlyBracket,    Key_LeftBracket, Key_RightBracket,           Key_Pipe
+     /* long key */,   Key_LeftArrow,           Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  Consumer_ScanPreviousTrack, Consumer_ScanNextTrack,
+     Key_RightAlt,     Consumer_PlaySlashPause, Consumer_VolumeDecrement, Consumer_VolumeIncrement, XXX,             Key_Backslash,              Key_RightShift,
+     Key_RightControl, Key_RightGui,            Key_Spacebar,             Key_RightShift,
      ___
        )
       )
@@ -108,11 +109,7 @@ static void OneShotHyper(uint8_t keyState) {
 }
 
 const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
-  if (macroIndex == MACRO_LEFTPAREN) {
-    return MACRODOWN(I(10), D(LeftShift), T(9), U(LeftShift));
-  } else if (macroIndex == MACRO_RIGHTPAREN) {
-    return MACRODOWN(I(10), D(LeftShift), T(0), U(LeftShift));
-  } else if (macroIndex == MACRO_ALLMODS) {
+  if (macroIndex == MACRO_ALLMODS) {
     OneShotHyper(keyState);
   } else if (macroIndex == MACRO_SEXP) {
     OneShotSexp(keyState);
