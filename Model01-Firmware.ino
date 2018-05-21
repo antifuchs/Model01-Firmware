@@ -28,7 +28,9 @@
 enum {QWERTY, FUNCTION};
 
 // Macros:
-enum { MACRO_ALLMODS, MACRO_SEXP, MACRO_HS};
+enum { MACRO_ALLMODS, MACRO_SEXP};
+
+#define LHYPER(key) (LALT(LGUI(LCTRL((key)))))
 
 // *INDENT-OFF*
 // To align these blocks, mark each one (one side at a time) and use C-u M-x align RET.
@@ -49,10 +51,10 @@ KEYMAPS(
      ShiftToLayer(FUNCTION)),
 
   [FUNCTION] = KEYMAP_STACKED
-    (___,           Key_F1,        Key_F2,            Key_F3,      Key_F4,      Key_F5,      ___,
-     Key_Tab,       XXX,           Key_mouseScrollUp, M(MACRO_HS), M(MACRO_HS), M(MACRO_HS), XXX,
-     Key_mouseBtnR, Key_mouseBtnL, Key_mouseScrollDn, M(MACRO_HS), M(MACRO_HS), M(MACRO_HS),
-     Key_LeftShift, Key_Home,      Key_End,           M(MACRO_HS), M(MACRO_HS), M(MACRO_HS), Key_LeftAlt,
+    (___,           Key_F1,        Key_F2,            Key_F3,        Key_F4,        Key_F5,        ___,
+     Key_Tab,       XXX,           Key_mouseScrollUp, LHYPER(Key_E), LHYPER(Key_R), LHYPER(Key_T), XXX,
+     Key_mouseBtnR, Key_mouseBtnL, Key_mouseScrollDn, LHYPER(Key_D), LHYPER(Key_F), LHYPER(Key_G),
+     Key_LeftShift, Key_Home,      Key_End,           LHYPER(Key_C), LHYPER(Key_V), LHYPER(Key_B), Key_LeftAlt,
      Key_LeftShift, Key_Backspace, Key_LeftGui,       Key_LeftControl,
      ___,
 
@@ -116,12 +118,6 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
   case MACRO_SEXP:
     OneShotSexp(keyState);
     return MACRO_NONE;
-  case MACRO_HS:
-    return MACRODOWN(D(LeftControl), D(LeftGui), D(LeftAlt),
-                     W(10),
-                     Tr(keymaps[QWERTY][Macros.row][Macros.col]),
-                     W(10),
-                     U(LeftControl), U(LeftGui), U(LeftAlt));
   }
   return MACRO_NONE;
 }
