@@ -28,22 +28,24 @@
 enum {QWERTY, FUNCTION};
 
 // Macros:
-enum { MACRO_ALLMODS, MACRO_SEXP};
+// enum { };
 
 #define LHYPER(key) (LALT(LGUI(LCTRL((key)))))
+#define Key_Sexpwise LALT(Key_LeftControl)
+#define Key_Hyper LALT(LGUI(Key_LeftControl))
 
 // *INDENT-OFF*
 // To align these blocks, mark each one (one side at a time) and use C-u M-x align RET.
 KEYMAPS(
   [QWERTY] = KEYMAP_STACKED
-    (M(MACRO_ALLMODS), Key_1,         Key_2,       Key_3, Key_4, Key_5, M(MACRO_SEXP),
-     Key_Backtick,     Key_Q,         Key_W,       Key_E, Key_R, Key_T, Key_Tab,
-     Key_Escape,       Key_A,         Key_S,       Key_D, Key_F, Key_G,
-     Key_LeftShift,    Key_Z,         Key_X,       Key_C, Key_V, Key_B, Key_LeftAlt,
-     Key_LeftShift,    Key_Backspace, Key_LeftGui, Key_LeftControl,
+    (Key_Hyper,     Key_1,         Key_2,       Key_3, Key_4, Key_5, Key_Sexpwise,
+     Key_Backtick,  Key_Q,         Key_W,       Key_E, Key_R, Key_T, Key_Tab,
+     Key_Escape,    Key_A,         Key_S,       Key_D, Key_F, Key_G,
+     Key_LeftShift, Key_Z,         Key_X,       Key_C, Key_V, Key_B, Key_LeftAlt,
+     Key_LeftShift, Key_Backspace, Key_LeftGui, Key_LeftControl,
      ShiftToLayer(FUNCTION),
 
-     M(MACRO_ALLMODS), Key_6,        Key_7,        Key_8,     Key_9,      Key_0,         Key_Minus,
+     Key_Hyper,        Key_6,        Key_7,        Key_8,     Key_9,      Key_0,         Key_Minus,
      Key_Enter,        Key_Y,        Key_U,        Key_I,     Key_O,      Key_P,         Key_Equals
      /* long key */,   Key_H,        Key_J,        Key_K,     Key_L,      Key_Semicolon, Key_Quote,
      Key_RightAlt,     Key_N,        Key_M,        Key_Comma, Key_Period, Key_Slash,     Key_RightShift,
@@ -99,25 +101,8 @@ void hostPowerManagementEventHandler(kaleidoscope::HostPowerManagement::Event ev
   toggleLedsOnSuspendResume(event);
 }
 
-static void OneShotSexp(uint8_t keyState) {
-  handleKeyswitchEvent(OSM(LeftControl), UNKNOWN_KEYSWITCH_LOCATION, keyState);
-  handleKeyswitchEvent(OSM(LeftAlt), UNKNOWN_KEYSWITCH_LOCATION, keyState);
-}
-
-static void OneShotHyper(uint8_t keyState) {
-  handleKeyswitchEvent(OSM(LeftControl), UNKNOWN_KEYSWITCH_LOCATION, keyState);
-  handleKeyswitchEvent(OSM(LeftAlt), UNKNOWN_KEYSWITCH_LOCATION, keyState);
-  handleKeyswitchEvent(OSM(LeftGui), UNKNOWN_KEYSWITCH_LOCATION, keyState);
-}
-
 const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
   switch(macroIndex) {
-  case MACRO_ALLMODS:
-    OneShotHyper(keyState);
-    return MACRO_NONE;
-  case MACRO_SEXP:
-    OneShotSexp(keyState);
-    return MACRO_NONE;
   }
   return MACRO_NONE;
 }
